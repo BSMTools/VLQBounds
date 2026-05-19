@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vlqbounds"
+version = "1.0"
+description = "Python toolkit for confronting vector-like quark scenarios with collider limits."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Rachid Benbrik" },
+  { name = "Mohammed Boukidi", email = "mohammed.boukidi@ced.uca.ac.ma" },
+   { name = "Mohamed Ech-chaouy" },
+    { name = "Stefano Moretti" },
+  { name = "Khawla Salime" },
+  { name = "Qi-Shu Yan" }
+]
+keywords = ["HEP", "particle physics", "vector-like quarks", "LHC", "collider phenomenology"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Physics"
+]
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "pandas>=2.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/MDBKD/HEP/VLQBounds"
+Repository = "https://github.com/MDBKD/HEP/VLQBounds"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["vlqbounds*"]
+exclude = ["__pycache__*"]
+
