@@ -710,7 +710,7 @@ class VLQBoundsFacade(CouplingLimitEngine):
         print(_bline(""))
         print(_bline("Authors:", dim))
         print(_bline("Abdesslam Arhrib  ·  Rachid Benbrik  ·  Mohammed Boukidi", silver))
-        print(_bline("Mohamed Ech-chaouy  ·  Stefano Moretti  ·  K. Kahime", silver))
+        print(_bline("Mohamed Ech-chaouy  ·  Stefano Moretti", silver))
         print(_bline("Khawla Salime  ·  Qi-Shu Yan", silver))
         print(_bline("arXiv:2605.20848", dim))
         print(_bline(""))

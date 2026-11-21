@@ -188,8 +188,8 @@ Please also cite the experimental papers whose limits drive your results; the
 
 ## Authors
 
-A. Arhrib · R. Benbrik · M. Boukidi · M. Ech-chaouy · S. Moretti · K. Kahime ·
-K. Salime · Q. S. Yan
+A. Arhrib · R. Benbrik · M. Boukidi · M. Ech-chaouy · S. Moretti · K. Salime ·
+Q. S. Yan
 
 ## Contributing
 
