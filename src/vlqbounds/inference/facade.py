@@ -343,6 +343,9 @@ class VLQBoundsFacade(CouplingLimitEngine):
 
     # ── Mass and coupling setter ──────────────────────────────────────────────
     def set_mass_and_coupling(self, kwargs, mass_key, coupling_key, width_key, sin_key):
+        # Each call fully defines the point: drop any mixing, coupling or width
+        # left over from a previous call with a different parameterisation.
+        self.m._state.reset_coupling()
         if coupling_key in kwargs:
             if kwargs[coupling_key] is None:
                 raise ValueError(_c(_C.BRIGHT_RED, f"Error: {coupling_key} must not be None"))

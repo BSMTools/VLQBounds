@@ -5,6 +5,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Iterable, List, Mapping, Optional, Sequence, Tuple, Union
 import json
+import os
 
 import numpy as np
 import pandas as pd
@@ -264,9 +265,14 @@ def _resolve_data_root(data_root: Optional[Union[str, Path]]) -> Path:
     if data_root is not None:
         return Path(data_root).expanduser().resolve()
 
+    env_root = os.environ.get("VLQBOUNDS_DATA")
+    if env_root:
+        return Path(env_root).expanduser().resolve()
+
     module_dir = Path(__file__).resolve().parent
     package_root = module_dir.parent.parent
     candidates = (
+        package_root.parent / "data",  # repository root (editable install)
         package_root / "data",
         Path.cwd().resolve() / "data",
         Path.cwd().resolve(),

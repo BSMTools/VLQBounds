@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterator, List, Mapping, Optional, Sequence, Tuple, Union
 
 import json
+import os
 import warnings
 import numpy as np
 from numpy.typing import NDArray
@@ -527,11 +528,16 @@ class ExperimentalBoundsRepository:
         if data_directory is not None:
             return Path(data_directory).expanduser().resolve()
 
+        env_root = os.environ.get("VLQBOUNDS_DATA")
+        if env_root:
+            return Path(env_root).expanduser().resolve()
+
         module_dir = Path(__file__).resolve().parent
         project_root = module_dir.parent.parent
         cwd = Path.cwd().resolve()
 
         candidates = (
+            project_root.parent / "data",  # repository root (editable install)
             project_root / "data",
             cwd / "data",
             module_dir / "data",
