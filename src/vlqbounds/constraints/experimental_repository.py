@@ -214,7 +214,8 @@ class JsonLimitCurveReader:
 
     Supported payload shapes include:
       - list of points: [{"mass": ..., "expected": ..., "observed": ...}, ...]
-      - list of rows: [[mass, obs], ...] or [[mass, exp, obs], ...]
+      - list of rows: [[mass, obs], ...] or [[mass, obs, exp, ...], ...]
+        (the column order used by every table shipped in data/)
       - flat arrays: {"mass": [...], "expected": [...], "observed": [...]}
       - nested payloads under keys such as data, curve, payload, limit_curve
       - column-oriented layouts with explicit field maps
@@ -322,15 +323,11 @@ class JsonLimitCurveReader:
         for row in points:
             if not isinstance(row, Sequence) or isinstance(row, (str, bytes, bytearray)) or len(row) < 2:
                 raise BoundsCatalogError(
-                    "Each point row must contain at least [mass, observed] or [mass, expected, observed]."
+                    "Each point row must contain at least [mass, observed] or [mass, observed, expected]."
                 )
             masses.append(row[0])
-            if len(row) == 2:
-                expected.append(np.nan)
-                observed.append(row[1])
-            else:
-                expected.append(row[1])
-                observed.append(row[2])
+            observed.append(row[1])
+            expected.append(np.nan if len(row) == 2 else row[2])
 
         return LimitCurveData(
             masses=self._as_float_array(masses),
