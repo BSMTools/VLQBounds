@@ -43,6 +43,11 @@ class CouplingLimitDescriptor:
     coupling_type: str
     energy_tev: int
     luminosity_fbinv: float
+    # Multiplies the tabulated limits to express them in the package's
+    # coupling normalisation (k_T, k_B = sqrt(2) sin(theta_L) for singlets).
+    # Use sqrt(2) for experimental couplings that approximate sin(theta),
+    # i.e. L ⊃ (g/sqrt2) kappa Q W q.
+    limit_scale: float = 1.0
 
     def to_mapping(self) -> dict[str, Any]:
         return {
@@ -55,6 +60,7 @@ class CouplingLimitDescriptor:
             "coupling_type": self.coupling_type,
             "energy_tev": self.energy_tev,
             "luminosity_fbinv": self.luminosity_fbinv,
+            "limit_scale": self.limit_scale,
         }
 
 
@@ -111,7 +117,27 @@ _RAW_COUPLING_LIMIT_REGISTRY: Final[dict[tuple[str, str], list[dict[str, Any]]]]
                      'process': 'pp --> Btq --> tW --> bqq,lnu/qq',
                      'coupling_type': 'k_B',
                      'energy_tev': 13,
-                     'luminosity_fbinv': 138}],
+                     'luminosity_fbinv': 138},
+                    {'index': 6,
+                     'file_name': '2606.01423_CMS_Fig10a_pp_Bbq_wtbq_singlet.json',
+                     'key': '01423f10a',
+                     'label': 'arXiv:2606.01423',
+                     'experiment': 'CMS',
+                     'process': 'pp --> Bbq --> tW --> l',
+                     'coupling_type': 'k_B',
+                     'energy_tev': 13,
+                     'luminosity_fbinv': 138,
+                     'limit_scale': 2 ** 0.5},
+                    {'index': 7,
+                     'file_name': '2606.01423_CMS_Fig10b_pp_Btq_wttq_singlet.json',
+                     'key': '01423f10b',
+                     'label': 'arXiv:2606.01423',
+                     'experiment': 'CMS',
+                     'process': 'pp --> Btq --> tW --> l',
+                     'coupling_type': 'k_B',
+                     'energy_tev': 13,
+                     'luminosity_fbinv': 138,
+                     'limit_scale': 2 ** 0.5}],
  ('B', 'Doublet'): [{'index': 0,
                      'file_name': '2308.02595_ATLAS_Fig9b_pp_B_bH_k_doublet.json',
                      'key': '02595f9b',
@@ -399,7 +425,26 @@ _RAW_COUPLING_LIMIT_REGISTRY: Final[dict[tuple[str, str], list[dict[str, Any]]]]
                      'process': 'pp --> Tb(t)q --> tZ/H --> 0l+1l+>=2l',
                      'coupling_type': 'k_T',
                      'energy_tev': 13,
-                     'luminosity_fbinv': 139}],
+                     'luminosity_fbinv': 139},
+                    {'index': 21,
+                     'file_name': '2506.15515_ATLAS_Fig6a_pp_Tbq_Wb_singlet.json',
+                     'key': '15515f6a',
+                     'label': 'arXiv:2506.15515',
+                     'experiment': 'ATLAS',
+                     'process': 'pp --> Tbq --> Wbbq --> 1l',
+                     'coupling_type': 'k_T',
+                     'energy_tev': 13,
+                     'luminosity_fbinv': 140,
+                     'limit_scale': 2 ** 0.5},
+                    {'index': 22,
+                     'file_name': '2604.17564_CMS_Fig4b_pp_VLQ_Wb_Tsinglet.json',
+                     'key': '17564f4b',
+                     'label': 'arXiv:2604.17564',
+                     'experiment': 'CMS',
+                     'process': 'pp --> T --> Wb --> 1l',
+                     'coupling_type': 'k_T',
+                     'energy_tev': 13,
+                     'luminosity_fbinv': 138}],
  ('T', 'Doublet'): [{'index': 0,
                      'file_name': '2305.03401_ATLAS_f13b_pp_Tbq_Ztbq_k_T_doublet.json',
                      'key': '03401f13b',
@@ -635,6 +680,22 @@ class CouplingLimitEngine(CrossSectionLimitEngine):
 
         if self._active_species() in {"B", "T"}:
             self.coupling_factor_to_coupling_strength(self._active_species())
+
+        self._apply_limit_scales(descriptors)
+
+    def _apply_limit_scales(self, descriptors: Sequence[CouplingLimitDescriptor]) -> None:
+        for index, descriptor in enumerate(descriptors):
+            scale = descriptor.limit_scale
+            if scale == 1.0:
+                continue
+            for arrays in (
+                self.coupling_obs_lower,
+                self.coupling_obs_upper,
+                self.coupling_exp_lower,
+                self.coupling_exp_upper,
+            ):
+                if arrays is not None and arrays[index] is not None:
+                    arrays[index] = np.asarray(arrays[index], dtype=np.float64) * scale
 
     # ------------------------------------------------------------------
     # Coupling classification
