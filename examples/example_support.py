@@ -14,11 +14,22 @@ from matplotlib.ticker import AutoMinorLocator
 
 def _latex_available() -> bool:
     """
-    Return True when a LaTeX executable is available in the current environment.
+    Return True when Matplotlib can actually typeset with LaTeX.
+
+    A `latex` executable alone is not enough: Matplotlib also needs packages
+    such as type1cm and cm-super, so a tiny test render is attempted.
     """
     import shutil
 
-    return shutil.which("latex") is not None
+    if shutil.which("latex") is None:
+        return False
+    try:
+        from matplotlib.texmanager import TexManager
+
+        TexManager().make_dvi(r"$\kappa$", 10)
+        return True
+    except Exception:
+        return False
 
 
 def configure_plot_style(*, use_tex: bool = True) -> None:
