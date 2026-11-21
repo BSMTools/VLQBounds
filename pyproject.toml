@@ -4,40 +4,55 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vlqbounds"
-version = "1.0"
-description = "Python toolkit for confronting vector-like quark scenarios with collider limits."
+version = "1.1.0"
+description = "Confront vector-like quark models with ATLAS and CMS exclusion limits."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
+  { name = "Abdesslam Arhrib" },
   { name = "Rachid Benbrik" },
-  { name = "Mohammed Boukidi", email = "mohammed.boukidi@ced.uca.ac.ma" },
-   { name = "Mohamed Ech-chaouy" },
-    { name = "Stefano Moretti" },
+  { name = "Mohammed Boukidi" },
+  { name = "Mohamed Ech-chaouy" },
+  { name = "Stefano Moretti" },
+  { name = "K. Kahime" },
   { name = "Khawla Salime" },
-  { name = "Qi-Shu Yan" }
+  { name = "Qi-Shu Yan" },
 ]
-keywords = ["HEP", "particle physics", "vector-like quarks", "LHC", "collider phenomenology"]
+keywords = [
+  "high-energy physics", "particle physics", "vector-like quarks", "LHC",
+  "ATLAS", "CMS", "exclusion limits", "reinterpretation", "collider phenomenology",
+]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Intended Audience :: Science/Research",
   "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Topic :: Scientific/Engineering :: Physics"
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Physics",
 ]
 dependencies = [
   "numpy>=1.24",
   "scipy>=1.10",
-  "pandas>=2.0"
+  "pandas>=2.0",
 ]
 
+[project.optional-dependencies]
+plot = ["matplotlib>=3.7"]
+test = ["pytest>=7.4"]
+dev = ["matplotlib>=3.7", "pytest>=7.4"]
+
 [project.urls]
-Homepage = "https://github.com/MDBKD/HEP/VLQBounds"
-Repository = "https://github.com/MDBKD/HEP/VLQBounds"
+Homepage = "https://github.com/BSMTools/VLQBounds"
+Repository = "https://github.com/BSMTools/VLQBounds"
+Issues = "https://github.com/BSMTools/VLQBounds/issues"
+Paper = "https://arxiv.org/abs/2605.20848"
+Changelog = "https://github.com/BSMTools/VLQBounds/blob/master/CHANGELOG.md"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -48,3 +63,6 @@ where = ["src"]
 include = ["vlqbounds*"]
 exclude = ["__pycache__*"]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

@@ -1,4 +1,5 @@
 import datetime
+from vlqbounds import __version__
 from vlqbounds.models import *
 from .evaluation import (
     append_scan_dataframe_row,
@@ -542,7 +543,7 @@ class VLQBoundsFacade(CouplingLimitEngine):
         _br()
         print(_hr("═", _C.BRIGHT_CYAN))
         print(_box_line(
-            _c(_C.BRIGHT_WHITE + _C.BOLD, "  ⚛  VLQBounds  v-0.1   │   Analysis Report"),
+            _c(_C.BRIGHT_WHITE + _C.BOLD, f"  ⚛  VLQBounds  v{__version__}   │   Analysis Report"),
             color=_C.BRIGHT_CYAN,
         ))
         print(_hr("═", _C.BRIGHT_CYAN))
@@ -702,15 +703,16 @@ class VLQBoundsFacade(CouplingLimitEngine):
         print()
         print(top)
         print(_bline(""))
-        print(_bline("⚛  VLQBounds   v-0.1  ⚛", gold))
+        print(_bline(f"⚛  VLQBounds   v{__version__}  ⚛", gold))
         print(_bline(""))
         print(mid)
         print(_bline("Python toolkit for confronting vector-like quark scenarios with collider limits", teal))
         print(_bline(""))
         print(_bline("Authors:", dim))
-        print(_bline("Rachid Benbrik  ·  Mohammed Boukidi", silver))
-        print(_bline("Mohamed Ech-chaouy  ·  Stefano Moretti", silver))
+        print(_bline("Abdesslam Arhrib  ·  Rachid Benbrik  ·  Mohammed Boukidi", silver))
+        print(_bline("Mohamed Ech-chaouy  ·  Stefano Moretti  ·  K. Kahime", silver))
         print(_bline("Khawla Salime  ·  Qi-Shu Yan", silver))
+        print(_bline("arXiv:2605.20848", dim))
         print(_bline(""))
         print(mid)
         print(_bline(f"Session started  {ts}", dim))

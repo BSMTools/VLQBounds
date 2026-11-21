@@ -1,6 +1,7 @@
 from vlqbounds.theory import mass_ratio, compute_limit_ratios
 from vlqbounds.models import TopPartnerSinglet, BottomPartnerDoublet, XPartnerDoublet, YPartnerDoublet, YPartnerTriplet
-from vlqbounds.inference import VLQBounds, ExperimentalBoundsRepository
+from vlqbounds.inference import VLQBounds
+from vlqbounds.constraints import ExperimentalBoundsRepository
 
 
 def main() -> None:

@@ -1,0 +1,87 @@
+cff-version: 1.2.0
+message: "If you use VLQBounds, please cite the paper below."
+title: "VLQBounds"
+abstract: >-
+  A data-driven Python tool for confronting vector-like quark models with
+  ATLAS and CMS exclusion limits from pair and single production.
+type: software
+version: 1.1.0
+license: MIT
+repository-code: "https://github.com/BSMTools/VLQBounds"
+keywords:
+  - vector-like quarks
+  - LHC
+  - exclusion limits
+  - reinterpretation
+  - high-energy physics
+authors:
+  - family-names: Arhrib
+    given-names: Abdesslam
+  - family-names: Benbrik
+    given-names: Rachid
+    orcid: "https://orcid.org/0000-0002-5159-0325"
+  - family-names: Boukidi
+    given-names: Mohammed
+    orcid: "https://orcid.org/0000-0001-9961-8772"
+  - family-names: Ech-chaouy
+    given-names: Mohamed
+    orcid: "https://orcid.org/0009-0007-2685-4759"
+  - family-names: Moretti
+    given-names: Stefano
+    orcid: "https://orcid.org/0000-0002-8601-7246"
+  - family-names: Kahime
+    given-names: K.
+  - family-names: Salime
+    given-names: Khawla
+    orcid: "https://orcid.org/0009-0004-0664-6934"
+  - family-names: Yan
+    given-names: Qi-Shu
+    orcid: "https://orcid.org/0000-0003-0433-1969"
+preferred-citation:
+  type: article
+  title: "VLQBounds: Confronting Vector-Like Quark Models with LHC Searches"
+  authors:
+    - family-names: Arhrib
+      given-names: A.
+    - family-names: Benbrik
+      given-names: R.
+    - family-names: Boukidi
+      given-names: M.
+    - family-names: Ech-chaouy
+      given-names: M.
+    - family-names: Moretti
+      given-names: S.
+    - family-names: Kahime
+      given-names: K.
+    - family-names: Salime
+      given-names: K.
+    - family-names: Yan
+      given-names: Q. S.
+  year: 2026
+  identifiers:
+    - type: other
+      value: "arXiv:2605.20848"
+  url: "https://arxiv.org/abs/2605.20848"
+references:
+  - type: article
+    title: "Vector-Like Quarks at the LHC: A Unified Perspective from ATLAS and CMS Exclusion Limits"
+    authors:
+      - family-names: Benbrik
+        given-names: R.
+      - family-names: Boukidi
+        given-names: M.
+      - family-names: Ech-chaouy
+        given-names: M.
+      - family-names: Moretti
+        given-names: S.
+      - family-names: Salime
+        given-names: K.
+      - family-names: Yan
+        given-names: Q. S.
+    journal: "Journal of High Energy Physics"
+    volume: 2025
+    issue: 3
+    start: 20
+    year: 2025
+    doi: "10.1007/JHEP03(2025)020"
+    url: "https://arxiv.org/abs/2412.01761"

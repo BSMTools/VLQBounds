@@ -1,35 +1,40 @@
 # Installation
 
-## 1. Create and activate a virtual environment
+## 1. Get the code
+
+```bash
+git clone https://github.com/BSMTools/VLQBounds.git
+cd VLQBounds
+```
+
+## 2. Create and activate a virtual environment
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+python -m pip install --upgrade pip
 ```
 
-## 2. Upgrade packaging tools
+## 3. Install
 
 ```bash
-python -m pip install --upgrade pip setuptools wheel
+python -m pip install -e .            # core: numpy, scipy, pandas
+python -m pip install -e ".[plot]"    # + matplotlib, for the figure scripts
+python -m pip install -e ".[dev]"     # + pytest, for development
 ```
 
-## 3. Install the package
-
-Standard installation:
+The limit tables live in `data/` at the repository root and are found
+automatically for editable installs, from any working directory. To use a
+different copy of the tables, set
 
 ```bash
-pip install .
+export VLQBOUNDS_DATA=/path/to/data
 ```
 
-Editable installation for development:
+## 4. Check the installation
 
 ```bash
-pip install -e .
-```
-
-
-## 4. Quick import test
-
-```bash
-python -c "from vlqbounds.inference import VLQBounds; print('VLQBounds import OK')"
+python -c "import vlqbounds; print('VLQBounds', vlqbounds.__version__)"
+python examples/validate_runtime_smoke.py
+python -m pytest                      # physics regression tests (needs the [dev] extra)
 ```
